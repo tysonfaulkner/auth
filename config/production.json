@@ -1,0 +1,9 @@
+{
+  "server": {
+    "origin": "http://url"
+  },
+  "db": {
+    "synchronize": false
+  }
+}
+
