@@ -1,7 +1,7 @@
 import { NestFactory } from '@nestjs/core'
 import { AppModule } from './app.module'
 import * as config from 'config'
-import { Logger } from '@nestjs/common'
+import { Logger, ValidationPipe } from '@nestjs/common'
 
 async function bootstrap() {
   const serverConfig = config.get('server')
@@ -15,7 +15,7 @@ async function bootstrap() {
     app.enableCors({ origin: serverConfig.origin })
     logger.log(`Accepting requests from origin ${serverConfig.origin}`)
   }
-
+  app.useGlobalPipes(new ValidationPipe())
   const port = process.env.PORT || serverConfig.port || 3000
   await app.listen(port);
   logger.log(`Application listening on port ${port}`)

@@ -1,11 +1,12 @@
-import { Module } from '@nestjs/common';
-import { UserService } from './user.service';
-import { UserController } from './user.controller';
-import { PassportModule } from '@nestjs/passport';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { User } from './user.entity';
-import { JwtModule } from '@nestjs/jwt';
+import { Module } from '@nestjs/common'
+import { UserService } from './user.service'
+import { UserController } from './user.controller'
+import { PassportModule } from '@nestjs/passport'
+import { TypeOrmModule } from '@nestjs/typeorm'
+import { User, EmailVerification } from './user.entity'
+import { JwtModule } from '@nestjs/jwt'
 import * as config from 'config'
+import { SendEmail } from '../shared/emails'
 
 const jwtConfig = config.get('jwt')
 
@@ -15,12 +16,12 @@ const jwtConfig = config.get('jwt')
     JwtModule.register({
       secret: process.env.JWT_SECRET || jwtConfig.secret,
       signOptions: {
-        expiresIn: jwtConfig.expiresIn
-      }
+        expiresIn: jwtConfig.expiresIn,
+      },
     }),
-    // TypeOrmModule.forFeature([User])
+    TypeOrmModule.forFeature([User, EmailVerification])
   ],
-  providers: [UserService],
+  providers: [UserService, SendEmail],
   controllers: [UserController],
 })
 export class UserModule {}

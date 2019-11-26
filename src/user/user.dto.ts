@@ -8,3 +8,14 @@ export class UserAuthDto {
   @IsNotEmpty()
   readonly password: string
 }
+
+export class ForgotPwDto {
+  @IsNotEmpty()
+  @IsEmail()
+  readonly email: string
+}
+
+export class ResetPwDto {
+  @IsNotEmpty()
+  readonly password: string
+}

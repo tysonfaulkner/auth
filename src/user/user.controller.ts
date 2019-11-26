@@ -1,22 +1,47 @@
-import { Controller, Post, Body, ValidationPipe } from '@nestjs/common';
-import { UserService } from './user.service';
-import { UserAuthDto } from './user.dto';
+import {
+  Controller,
+  Post,
+  Body,
+  Get,
+  Param
+} from '@nestjs/common'
+import { UserService } from './user.service'
+import { UserAuthDto, ResetPwDto, ForgotPwDto } from './user.dto'
 
 @Controller('user')
 export class UserController {
-  constructor (
-    private userService: UserService
-  ) {}
+  constructor(private userService: UserService) {}
 
   @Post('register')
-  createUser(@Body(ValidationPipe) userAuthDto: UserAuthDto) {
+  createUser(@Body() userAuthDto: UserAuthDto) {
     return this.userService.createUser(userAuthDto)
   }
 
   @Post('login')
-  login(@Body(ValidationPipe) userAuthDto: UserAuthDto) {
+  login(@Body() userAuthDto: UserAuthDto) {
     return this.userService.login(userAuthDto)
   }
 
-}
+  @Get('confirm/:code')
+  confirmEmail(@Param('code') code: string) {
+    return this.userService.confirmEmail(code)
+  }
 
+  @Post('forgot-password')
+  forgotPassword(@Body() forgotPwDto: ForgotPwDto) {
+    return this.userService.forgotPassword(forgotPwDto)
+  }
+
+  @Get('reset-password/:code')
+  resetPasswordCheck(@Param('code') code: string) {
+    return this.userService.resetPasswordCheck(code)
+  }
+
+  @Post('reset-password/:code')
+  resetPassword(
+    @Param('code') code: string,
+    @Body() resetPwDto: ResetPwDto
+  ) {
+    return this.userService.resetPassword(code, resetPwDto)
+  }
+}
