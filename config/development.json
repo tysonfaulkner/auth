@@ -9,7 +9,6 @@
     "secret": "rapidsecrettest",
     "expiresIn": 3600000
   },
-  "sendgridKey": "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",
   "email": {
     "fromName": "Rapid Innovation",
     "fromAddress": "admin@rapidinnovation.dev",

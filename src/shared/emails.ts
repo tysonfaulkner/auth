@@ -4,7 +4,7 @@ import * as nodemailerSG from 'nodemailer-sendgrid'
 const config = require('config')
 
 export class SendEmail {
-  private sgKey = process.env.SENDGRID_API_KEY || config.get('sendgridKey')
+  private sgKey = process.env.SENDGRID_API_KEY
   private emailConfig = config.get('email')
   private transport = nodemailer.createTransport(
     nodemailerSG({ apiKey: this.sgKey })
