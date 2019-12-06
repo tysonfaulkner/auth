@@ -15,6 +15,7 @@ import { JwtPayload } from './user.interface'
 import { SendEmail } from '../shared/emails'
 import { User, EmailVerification, ResetPassword } from './user.entity'
 import { UserAuthDto, ResetPwDto, ForgotPwDto } from './user.dto'
+import uuid from '../shared'
 
 @Injectable()
 export class UserService {

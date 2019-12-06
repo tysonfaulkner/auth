@@ -4,9 +4,12 @@ import {
   Body,
   Get,
   Param,
+  UseGuards,
+  Req,
 } from '@nestjs/common'
 import { UserService } from './user.service'
 import { UserAuthDto, ResetPwDto, ForgotPwDto } from './user.dto'
+import { AuthGuard } from '@nestjs/passport'
 
 @Controller('user')
 export class UserController {
@@ -43,5 +46,11 @@ export class UserController {
     @Body() resetPwDto: ResetPwDto
   ) {
     return this.userService.resetPassword(code, resetPwDto)
+  }
+
+  @Post('test')
+  @UseGuards(AuthGuard)
+  test(@Req() req) {
+    console.log(req)
   }
 }
