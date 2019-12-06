@@ -3,10 +3,10 @@ import { UserService } from './user.service'
 import { UserController } from './user.controller'
 import { PassportModule } from '@nestjs/passport'
 import { TypeOrmModule } from '@nestjs/typeorm'
-import { User, EmailVerification } from './user.entity'
+import { User, EmailVerification, ResetPassword } from './user.entity'
 import { JwtModule } from '@nestjs/jwt'
 import * as config from 'config'
-import { SendEmail } from '../shared/emails'
+import { SendEmail } from '../shared'
 
 const jwtConfig = config.get('jwt')
 
@@ -19,7 +19,7 @@ const jwtConfig = config.get('jwt')
         expiresIn: jwtConfig.expiresIn,
       },
     }),
-    TypeOrmModule.forFeature([User, EmailVerification])
+    TypeOrmModule.forFeature([User, EmailVerification, ResetPassword])
   ],
   providers: [UserService, SendEmail],
   controllers: [UserController],

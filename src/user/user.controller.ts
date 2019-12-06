@@ -3,7 +3,7 @@ import {
   Post,
   Body,
   Get,
-  Param
+  Param,
 } from '@nestjs/common'
 import { UserService } from './user.service'
 import { UserAuthDto, ResetPwDto, ForgotPwDto } from './user.dto'

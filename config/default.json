@@ -5,7 +5,7 @@
   "db": {
     "type": "postgres",
     "port": 5432,
-    "database": "postgres"
+    "database": "rapid"
   },
   "jwt": {
     "expiresIn": 3600

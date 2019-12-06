@@ -1,27 +1,26 @@
 import {
   Entity,
-  PrimaryGeneratedColumn,
+  PrimaryColumn,
   Column,
-  BaseEntity,
   Unique,
   CreateDateColumn,
-  PrimaryColumn,
   UpdateDateColumn,
 } from 'typeorm'
 import { IsEmail } from 'class-validator'
+import { Uuid, Hash } from '../shared'
 
 @Entity('user')
 @Unique(['email'])
-export class User extends BaseEntity {
-  @PrimaryGeneratedColumn()
-  id: number
+export class User {
+  @PrimaryColumn('uuid')
+  id: Uuid
 
   @Column()
   @IsEmail()
   email: string
 
   @Column()
-  hash: string
+  hash: Hash
 
   @Column('simple-array', { nullable: true })
   roles: string[]
@@ -40,9 +39,9 @@ export class User extends BaseEntity {
 }
 
 @Entity('email_verification')
-export class EmailVerification extends BaseEntity {
-  @PrimaryColumn()
-  user: number
+export class EmailVerification {
+  @PrimaryColumn('uuid')
+  user: Uuid
 
   @Column()
   code: string
@@ -55,9 +54,9 @@ export class EmailVerification extends BaseEntity {
 }
 
 @Entity('reset_password')
-export class ResetPassword extends BaseEntity {
-  @PrimaryColumn()
-  user: number
+export class ResetPassword {
+  @PrimaryColumn('uuid')
+  user: Uuid
 
   @Column()
   code: string
