@@ -38,6 +38,7 @@ export class UserService {
     }
 
     const user = new User()
+    user.id = uuid()
     user.email = email
     user.hash = await bcrypt.hashSync(password, 12)
 
