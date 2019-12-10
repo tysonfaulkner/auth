@@ -1,2 +1,2 @@
 
-export const uuid = require('uuid/v4')
+export const newUuid = require('uuid/v4')

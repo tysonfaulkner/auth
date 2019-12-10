@@ -15,7 +15,7 @@ import { JwtPayload } from './user.interface'
 import { SendEmail } from '../shared/emails'
 import { User, EmailVerification, ResetPassword } from './user.entity'
 import { UserAuthDto, ResetPwDto, ForgotPwDto } from './user.dto'
-import uuid from '../shared'
+import { newUuid } from '../shared'
 
 @Injectable()
 export class UserService {
@@ -39,7 +39,7 @@ export class UserService {
     }
 
     const user = new User()
-    user.id = uuid()
+    user.id = newUuid()
     user.email = email
     user.hash = await bcrypt.hashSync(password, 12)
 
