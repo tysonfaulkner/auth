@@ -10,6 +10,7 @@ import {
 import { UserService } from './user.service'
 import { UserAuthDto, ResetPwDto, ForgotPwDto } from './user.dto'
 import { AuthGuard } from '@nestjs/passport'
+import { GetUserId, Roles } from './user.decorator'
 
 @Controller('user')
 export class UserController {
@@ -49,8 +50,8 @@ export class UserController {
   }
 
   @Post('test')
-  @UseGuards(AuthGuard)
-  test(@Req() req) {
-    console.log(req)
+  @Roles('admin')
+  test(@GetUserId() user: string) {
+    console.log(user)
   }
 }

@@ -7,6 +7,7 @@ import { User, EmailVerification, ResetPassword } from './user.entity'
 import { JwtModule } from '@nestjs/jwt'
 import * as config from 'config'
 import { SendEmail } from '../shared'
+import { JwtStrategy } from './user.jwt-strategy'
 
 const jwtConfig = config.get('jwt')
 
@@ -21,7 +22,11 @@ const jwtConfig = config.get('jwt')
     }),
     TypeOrmModule.forFeature([User, EmailVerification, ResetPassword])
   ],
-  providers: [UserService, SendEmail],
   controllers: [UserController],
+  providers: [UserService, SendEmail, JwtStrategy],
+  exports: [
+    JwtStrategy,
+    PassportModule,
+  ]
 })
 export class UserModule {}
